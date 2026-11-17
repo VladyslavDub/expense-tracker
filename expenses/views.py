@@ -21,7 +21,8 @@ def expense_list(request):
     expenses = Expense.objects.all().order_by('-date_of_expenditure', '-id')
     form = ExpenseForm()
     stats = totals_by_category(expenses)
-    return render(request, 'expenses/expenses_list.html', {'expenses': expenses, 'form': form, 'stats': stats})
+    categories = Expense.objects.values_list('category', flat=True).distinct().order_by('category')
+    return render(request, 'expenses/expenses_list.html', {'expenses': expenses, 'form': form, 'stats': stats, 'categories': categories})
 
 def expense_add(request):
     if request.method == 'POST':

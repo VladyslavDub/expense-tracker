@@ -7,4 +7,5 @@ class ExpenseForm(forms.ModelForm):
         fields = ['title', 'description', 'amount', 'category', 'date_of_expenditure']
         widgets = {
             'date_of_expenditure' : forms.DateInput(attrs={'type': 'date'}),
+            'category': forms.TextInput(attrs={'list': 'category-list', 'autocomplete': 'off'}),
         }

@@ -71,5 +71,10 @@
         document.getElementById('delete-dialog').showModal();
     }
 </script>
+<datalist id="category-list">
+    {% for category in categories %}
+        <option value="{{ category }}">
+    {% endfor %}
+</datalist>
 </body>
 </html>
