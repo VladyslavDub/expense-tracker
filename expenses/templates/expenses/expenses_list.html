@@ -9,9 +9,57 @@
         table { width: 100%; border-collapse: collapse; }
         th, td { padding: 8px 12px; border-bottom: 1px solid #ddd; text-align: left; }
         th { background: #f4f4f4; }
+        dialog {
+            border: none;
+            border-radius: 12px;
+            padding: 24px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        dialog::backdrop {
+            background: rgba(0, 0, 0, 0.5);
+        }
+        dialog p { margin 0 0 12px;}
+        dialog label {
+            display: block;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        dialog input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            box-sizing: border-box;
+        }
+        .button {
+            display: inline-block;
+            padding: 8px 16px;
+            margin-bottom: 16px;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .button:hover { background: #1d4ed8; }
+        .button-secondary {
+            padding: 8px 16px;
+            background: #e5e7eb;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
   </style>
 </head>
 <body>
+    <button class="button" onclick="document.getElementById('expense-dialog').showModal()">
+        + Add an expense
+
+    </button>
     <table>
     <thead>
         <tr>
@@ -34,5 +82,13 @@
         {% endfor %}
     </tbody>
 </table>
+<dialog id="expense-dialog">
+  <form method="post" action="{% url 'expense_add' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="button-secondary">Save</button>
+    <button type="button" class="button-secondary" onclick="this.closest('dialog').close()">Cancel</button>
+  </form>
+</dialog>
 </body>
 </html>
