@@ -52,7 +52,27 @@
             border-radius: 6px;
             cursor: pointer;
         }
-        
+        .summary {
+            background: #f4f4f4;
+            border-radius: 12px;
+            padding: 16px 24px;
+            margin-top: 10px;
+            margin-bottom: 24px;
+        }
+        .summary ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .summary li {
+            display: flex;
+            justify-content: space-between;
+            padding: 6px 0;
+            border-bottom: 1px solid #ddd;
+        }
+        .summary li:last-child {
+            border-bottom: none;
+        }
   </style>
 </head>
 <body>
@@ -82,6 +102,14 @@
         {% endfor %}
     </tbody>
 </table>
+<div class="summary">
+    <h2>Summary by category</h2>
+    <ul>
+        {% for category, total in stats.items %}
+        <li>{{ category }}: {{total}}</li>
+        {% endfor %}
+    </ul>
+</div>
 <dialog id="expense-dialog">
   <form method="post" action="{% url 'expense_add' %}">
     {% csrf_token %}
