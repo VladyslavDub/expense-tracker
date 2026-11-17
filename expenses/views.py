@@ -1,21 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Expense
 from .forms import ExpenseForm
+from .services import totals_by_category
 
 def expense_delete(request, pk):
     expense = get_object_or_404(Expense, pk=pk)
     if request.method == 'POST':
         expense.delete()
     return redirect('expense_list')
-
-def totals_by_category(expenses):
-    total_expenses = {}
-    for expense in expenses:
-        if expense.category in total_expenses:
-            total_expenses[expense.category] = total_expenses[expense.category] + expense.amount
-        else:
-            total_expenses[expense.category] = expense.amount
-    return total_expenses
 
 def expense_list(request):
     expenses = Expense.objects.all().order_by('-date_of_expenditure', '-id')

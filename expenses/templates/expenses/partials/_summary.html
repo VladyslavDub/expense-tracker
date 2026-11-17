@@ -1,0 +1,9 @@
+{% load static %}
+<div class="summary">
+    <h2>Summary by category</h2>
+    <ul>
+        {% for category, total in stats.items %}
+        <li>{{ category }}: {{total}}</li>
+        {% endfor %}
+    </ul>
+</div>

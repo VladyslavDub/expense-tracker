@@ -1,0 +1,28 @@
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th class="amount">Amount</th>
+            <th>Category</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expense in expenses %}
+        <tr>
+            <td>{{ expense.title }}</td>
+            <td>{{ expense.description }}</td>
+            <td class="amount">{{ expense.amount }}</td>
+            <td>{{ expense.category }}</td>
+            <td>{{ expense.date_of_expenditure|date:"d.m.Y" }}</td>
+            <td>
+                <button type="button" class="button-danger"
+                data-url="{% url 'expense_delete' expense.pk %}"
+                onclick="openDelete(this)">Delete</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>

@@ -11,70 +11,12 @@
     <button class="button" onclick="document.getElementById('expense-dialog').showModal()">
         + Add an expense
     </button>
-    <table>
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th class="amount">Amount</th>
-            <th>Category</th>
-            <th>Date</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for expense in expenses %}
-        <tr>
-            <td>{{ expense.title }}</td>
-            <td>{{ expense.description }}</td>
-            <td class="amount">{{ expense.amount }}</td>
-            <td>{{ expense.category }}</td>
-            <td>{{ expense.date_of_expenditure|date:"d.m.Y" }}</td>
-            <td>
-                <button type="button" class="button-danger"
-                data-url="{% url 'expense_delete' expense.pk %}"
-                onclick="openDelete(this)">Delete</button>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<div class="summary">
-    <h2>Summary by category</h2>
-    <ul>
-        {% for category, total in stats.items %}
-        <li>{{ category }}: {{total}}</li>
-        {% endfor %}
-    </ul>
-</div>
-<dialog id="expense-dialog">
-  <form method="post" action="{% url 'expense_add' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="button-secondary">Save</button>
-    <button type="button" class="button-secondary" onclick="this.closest('dialog').close()">Cancel</button>
-  </form>
-</dialog>
-<dialog id="delete-dialog">
-    <p>Delete this expense?</p>
-    <form id="delete-form" method="post">
-        {% csrf_token %}
-        <button type="submit" class="button-danger">Yes, delete</button>
-        <button type="button" class="button-secondary"
-                onclick="this.closest('dialog').close()">Cancel</button>
-    </form>
-</dialog>
-
-<script>
-    function openDelete(button) {
-        document.getElementById('delete-form').action = button.dataset.url;
-        document.getElementById('delete-dialog').showModal();
-    }
-</script>
-<datalist id="category-list">
-    {% for category in categories %}
-        <option value="{{ category }}">
-    {% endfor %}
-</datalist>
+    {% include 'expenses/partials/_table.html' %}
+    {% include 'expenses/partials/_summary.html' %}
+    {% include 'expenses/partials/_add_dialog.html' %}
+    {% include 'expenses/partials/_delete_dialog.html' %}
+    {% include 'expenses/partials/_category_list.html' %}
+    
+<script src="{% static 'expenses/app.js' %}"></script>
 </body>
 </html>
