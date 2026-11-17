@@ -18,6 +18,14 @@
             <td>{{ expense.category }}</td>
             <td>{{ expense.date_of_expenditure|date:"d.m.Y" }}</td>
             <td>
+                <button type="button" class="button-secondary"
+                data-url="{% url 'expense_edit' expense.pk %}"
+                data-title="{{ expense.title}}"
+                data-description="{{ expense.description}}"
+                data-amount="{{ expense.amount}}"
+                data-category="{{ expense.category}}"
+                data-date_of_expenditure="{{ expense.date_of_expenditure|date:'Y-m-d' }}"
+                onclick="openEdit(this)">Edit</button>
                 <button type="button" class="button-danger"
                 data-url="{% url 'expense_delete' expense.pk %}"
                 onclick="openDelete(this)">Delete</button>
