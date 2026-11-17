@@ -1,6 +1,6 @@
-body {
+body {      
             font-family: sans-serif;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 40px auto;
         }
         table {
@@ -42,6 +42,10 @@ body {
             border: 1px solid #ccc;
             border-radius: 6px;
             box-sizing: border-box;
+        }
+        .actions {
+            display: flex;
+            gap: 8px;
         }
         .amount {
             text-align: right;

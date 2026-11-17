@@ -8,18 +8,16 @@
     <link rel="stylesheet" href="{% static 'expenses/style.css' %}">
 </head>
 <body>
+    {% include 'expenses/partials/_messages.html' %}
     <button class="button" onclick="document.getElementById('expense-dialog').showModal()">
         + Add an expense
     </button>
-    {% include 'expenses/partials/_messages.html' %}
     {% include 'expenses/partials/_table.html' %}
     {% include 'expenses/partials/_summary.html' %}
     {% include 'expenses/partials/_add_dialog.html' %}
     {% include 'expenses/partials/_delete_dialog.html' %}
     {% include 'expenses/partials/_category_list.html' %}
     {% include 'expenses/partials/_edit_dialog.html' %}
-
-    
     <script src="{% static 'expenses/app.js' %}"></script>
 </body>
 </html>
