@@ -12,6 +12,9 @@
     <button class="button" onclick="document.getElementById('expense-dialog').showModal()">
         + Add an expense
     </button>
+    {% if selected_category %}
+        <p>Showing: <strong>{{ selected_category }}</strong>· <a href="{% url 'expense_list'%}">Show all</a></p>
+    {% endif %}
     {% include 'expenses/partials/_table.html' %}
     {% include 'expenses/partials/_summary.html' %}
     {% include 'expenses/partials/_add_dialog.html' %}
