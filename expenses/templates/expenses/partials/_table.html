@@ -1,4 +1,14 @@
 <table>
+    <form method="get" class="search">
+    <input type="text" name="q" value="{{ search }}" placeholder="Search by title">
+    {% if selected_category %}
+        <input type="hidden" name="category" value="{{ selected_category }}">
+    {% endif %}
+    <button type="submit" class="button-secondary">Search</button>
+    {% if search %}
+        <a href="{% url 'expense_list' %}">Clear</a>
+    {% endif %}
+</form>
     <thead>
         <tr>
             <th>Name</th>
@@ -33,6 +43,16 @@
                 </div>
             </td>
         </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6" class="empty">
+                {% if search or selected_category %}
+                    No expenses match your search.
+                {% else %}
+                    No expenses yet. Click "Add an expense" to create the first one.
+                {% endif %}
+            </td>
+</tr>
         {% endfor %}
     </tbody>
 </table>

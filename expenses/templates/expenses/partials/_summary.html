@@ -6,7 +6,7 @@
     </summary>
     <ul>
         {% for category, amount in stats.items %}
-        <li {% if category == selected_category %}class="active"{% endif %}><span><a href="?category={{ category|urlencode }}">{{ category }}</a></span><strong>{{ amount|floatformat:2 }}</strong></li>
+        <li {% if category == selected_category %}class="active"{% endif %}><span><a href="?category={{ category|urlencode }}{% if search %}&q={{ search|urlencode }}{% endif %}">{{ category }}</a></span><strong>{{ amount|floatformat:2 }}</strong></li>
         {% endfor %}
     </ul>
 </details>

@@ -27,8 +27,11 @@ def expense_list(request):
     )
     selected_category = request.GET.get('category')
     filtered = expenses
+    search = request.GET.get('q', '')
+    if search:
+        filtered = filtered.filter(title__icontains=search)
     if selected_category:
-        filtered = expenses.filter(category=selected_category)
+        filtered = filtered.filter(category=selected_category)
     return render(
         request,
         "expenses/expenses_list.html",
@@ -40,6 +43,7 @@ def expense_list(request):
             "categories": categories,
             "edit_form": edit_form,
             "total": total,
+            'search': search,
         },
     )
 
