@@ -24,6 +24,7 @@
             <p>Showing: <strong>{{ selected_category }}</strong>· <a href="{% url 'expense_list'%}">Show all</a></p>
         {% endif %}
         {% include 'expenses/partials/_table.html' %}
+        {% include 'expenses/partials/_pagination.html' %}
         {% include 'expenses/partials/_summary.html' %}
     </div>
     {% include 'expenses/partials/_add_dialog.html' %}

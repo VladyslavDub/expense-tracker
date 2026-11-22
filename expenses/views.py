@@ -26,17 +26,25 @@ def expense_list(request):
         .order_by("category")
     )
     selected_category = request.GET.get('category')
-    filtered = expenses
     search = request.GET.get('q', '')
+
+    filtered = expenses
     if search:
         filtered = filtered.filter(title__icontains=search)
     if selected_category:
         filtered = filtered.filter(category=selected_category)
+
+    paginator = Paginator(filtered, 10)
+    page_obj = paginator.get_page(request.GET.get('page'))
+
+    params = request.GET.copy()
+    params.pop('page', None)
+    query = params.urlencode()
     return render(
         request,
         "expenses/expenses_list.html",
         {
-            "expenses": filtered,
+            "expenses": page_obj,
             "form": form,
             "stats": stats,
             "selected_category": selected_category,
@@ -44,6 +52,7 @@ def expense_list(request):
             "edit_form": edit_form,
             "total": total,
             'search': search,
+            'query' : query,
         },
     )
 
