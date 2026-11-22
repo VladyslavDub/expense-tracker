@@ -6,17 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Expenses</title>
     <link rel="stylesheet" href="{% static 'expenses/style.css' %}">
+    <link rel="stylesheet" href="{% static 'expenses/style.css' %}?v=3">
 </head>
 <body>
     {% include 'expenses/partials/_messages.html' %}
     <button class="button" onclick="document.getElementById('expense-dialog').showModal()">
         + Add an expense
     </button>
+        <form method="get" class="search">
+    <input type="text" name="q" value="{{ search }}" placeholder="Search by title">
     {% if selected_category %}
-        <p>Showing: <strong>{{ selected_category }}</strong>· <a href="{% url 'expense_list'%}">Show all</a></p>
+        <input type="hidden" name="category" value="{{ selected_category }}">
     {% endif %}
-    {% include 'expenses/partials/_table.html' %}
-    {% include 'expenses/partials/_summary.html' %}
+    </form>
+    <div id="results">
+        {% if selected_category %}
+            <p>Showing: <strong>{{ selected_category }}</strong>· <a href="{% url 'expense_list'%}">Show all</a></p>
+        {% endif %}
+        {% include 'expenses/partials/_table.html' %}
+        {% include 'expenses/partials/_summary.html' %}
+    </div>
     {% include 'expenses/partials/_add_dialog.html' %}
     {% include 'expenses/partials/_delete_dialog.html' %}
     {% include 'expenses/partials/_category_list.html' %}

@@ -1,14 +1,4 @@
 <table>
-    <form method="get" class="search">
-    <input type="text" name="q" value="{{ search }}" placeholder="Search by title">
-    {% if selected_category %}
-        <input type="hidden" name="category" value="{{ selected_category }}">
-    {% endif %}
-    <button type="submit" class="button-secondary">Search</button>
-    {% if search %}
-        <a href="{% url 'expense_list' %}">Clear</a>
-    {% endif %}
-</form>
     <thead>
         <tr>
             <th>Name</th>
